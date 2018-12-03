@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load blog_tags %}
+<html lang="en">
+<head>
+{% load static %}
+
+
+
+
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+    <meta charset="UTF-8">
+    <title>{% block titleBlock %}
+        base
+    {% endblock %}</title>
+</head>
+<body>
+{% include 'css/slider.html' %}
+{% include 'css/nav.html' with blogname="*" %}
+{% include 'css/cs3.html' %}
+{% include 'css/js.html' %}
+
+<div class="row">
+    <div class="container">
+
+        <h1 align="center" style="color:red " > Welcome to exploreNepal</h1>
+        {% block bodyBlock %}
+        {% endblock %}
+    <h4 style="text-align: center">{% footer %}</h4>
+    </div></div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block bodyBlock %}
+<h1>API Documentation</h1>
+    <p class ='text-info'>HTTP GET</p>
+    <table class="table table-stripped">
+
+        <th>
+        <th><td>EndPoint</td></th>
+            <th><td>Description</td></th>
+
+    <tbody>
+    <tr>
+        <td><pre>/api/posts</pre></td>
+        <td>Get all Published post</td>
+    </tr>
+    <tr>
+        <td><pre>/api/post/(int:pk)</pre></td>
+        <td>Get one post</td>
+    </tr>
+    </tbody>
+    </>
+{% endblock bodyBlock %}

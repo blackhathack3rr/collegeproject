@@ -1,0 +1,45 @@
+{%  extends 'base.html' %}
+
+{% block bodyBlock %}
+    <table class="table table-bordered table-stripped table-hover table-sm">
+    <thead align="center">
+    <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>ID</th>
+    <th>Symbol</th>
+    <th>Price in USD</th>
+    <th>Max Supply</th>
+    <th>Last Update</th>
+    </tr>
+
+    </thead>
+
+    <tbody align="center">
+
+    {% for each in data %}
+        <tr class="{% if each.percent_change_24h.0 == "-" %} text-danger
+        {% else %}text-sucess
+        {% endif %}">
+        <td>{{ each.rank }}</td>
+        <td>{{ each.name }}</td>
+        <td>{{ each.id }}</td>
+        <td>{{ each.symbol }}</td>
+        <td>{{ each.price_usd }}</td>
+        <td>{{ each.max_supply }}</td>
+        <td>{{ each.last_updated }}</td>
+
+
+        </tr>
+
+    {% endfor %}
+
+
+    </tbody>
+
+
+    </table>
+
+
+
+{% endblock %}

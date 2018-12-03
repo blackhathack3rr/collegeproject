@@ -1,0 +1,69 @@
+{% load blog_tags %}
+                    {% if user.is_authenticated %}
+                        <h1 class="text.primary" style="text-align: center">Welcome : {{ user.username }}</h1>
+                    {% endif %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'blog:index' %}">{% blog_name %}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'blog:home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
+        <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:api_doc' %}">Api Documentation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:about' %}">About</a>
+            </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+                <a class="nav-link" href="{%  url 'chat:ind' %}">Chat</a>
+            </li>
+        {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:index' %}">View Add</a>
+            </li>
+
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+ {% if user.is_authenticated %}
+     {% else %}
+                    <a class="dropdown-item" href="{% url 'bus:index' %}">Business Signup</a>
+                <a class="dropdown-item" href="{% url 'bus:dashboard' %}">Business Login</a>
+{% endif %}
+                    {% if user.is_authenticated %}
+                        <a class="dropdown-item" href="/post">Add Post</a>
+                        <a class="dropdown-item" href="{% url 'blog:password_change' %}">Change password</a>
+                        <a class="dropdown-item" href="{% url 'blog:logout' %}?next={% url 'blog:home' %}">Logout</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'blog:login' %}?next={% url 'blog:home' %}">Login</a>
+<a class="dropdown-item" href="{% url 'blog:signup' %}">Signup</a>
+                    {% endif %}
+
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <form class="form-inline" method="post" action="{% url 'blog:search' %}">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2"  name="searchquery" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>

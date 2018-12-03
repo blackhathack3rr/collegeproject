@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block bodyBlock %}
+
+{% for res in result %}<ul>
+    <li><a href="{% url 'blog:detail' pk=res.pk %}">{{ res }}</a></li>
+    </ul>
+    {% empty %}
+    <P>No Results Found</P>
+    {% endfor %}
+    {{ count }} articles found
+{% endblock bodyBlock %}

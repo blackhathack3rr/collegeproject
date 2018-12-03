@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block bodyBlock %}
+
+<style>
+
+
+form, p, span {
+    margin:0;
+    padding:0; }
+
+input { font:10px arial; }
+
+a {
+    color:#0000FF;
+    text-decoration:none; }
+
+    a:hover { text-decoration:underline; }
+
+#wrapper, #loginform {
+    margin:0 auto;
+    padding-bottom:25px;
+    background:#EBF4FB;
+    width:504px;
+    border:1px solid #ACD8F0; }
+
+#loginform { padding-top:18px; }
+
+    #loginform p { margin: 5px; }
+
+#chatbox {
+    margin:0 auto;
+    margin-bottom:25px;
+    padding:10px;
+    background:#fff;
+    height:400px;
+    width:430px;
+    border:1px solid #ACD8F0;
+    overflow:auto; }
+.user{
+    text-align: right;
+}
+.user1{
+    text-align: left;
+}
+#usermsg {
+    width:395px;
+    border:1px solid #ACD8F0; }
+
+#submit { width: 60px; }
+
+.error { color: #ff0000; }
+
+#menu { padding:12.5px 25px 12.5px 25px; }
+
+.welcome { float:left; }
+
+.logout { float:right; }
+
+.msgln { margin:0 0 2px 0; }
+</style>
+
+
+
+<div id="wrapper">
+    <div id="menu">
+        <p class="welcome">Welcome, <b></b></p>
+        <p class="logout"><a id="exit" href="/home">Exit Chat</a></p>
+        <div style="clear:both"></div>
+    </div>
+
+
+
+    <form  id="chat-form" action="{% url 'chat:srh' %}l#bottom" method="POST" data-spy="affix" data-offset-bottom="10">
+        {% csrf_token %}
+        <div id="chatbox">
+
+        {% for i in form %}
+            {% ifequal i.cuser user %}
+                <div class="user">
+            <b>{{ i.message }}</b>: <b style="color:blue">
+                {{ i.cuser }}</b>  <small> {{ i.created }}</small><br/>
+        </div>
+            {% endifequal %}
+
+
+            {% ifnotequal i.cuser user %}
+                <div class="user1">
+            <b style="color:red;">
+                {{ i.cuser }}</b> : <b>{{ i.message }}</b><small> {{ i.created }}</small><br/>
+       </div>
+        {% endifnotequal %}
+{% endfor %}
+    </div>
+
+        <input type="hidden" name="use" value="{{ user.id }}"/>
+        <input type="text" style="height: 40px;width: 400px;font-size:15px;" class="" name="usermsg" type="text" id="usermsg" size="63" data-emojiable="true" data-emoji-input="unicode" />
+        <input style="height: 30px;width: 50px;" class="submit" name="submitmsg"  href="{% url 'chat:srh' %}?next={% url 'chat:srh' %}"type="submit"  id="submitmsg" value="Send" />
+    </form>
+
+</div>
+    <A name=bottom></A>
+
+
+{% endblock bodyBlock %}

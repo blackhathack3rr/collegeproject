@@ -1,0 +1,64 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+{% load ratings %}
+
+{%  block bodyBlock %}
+    <h1>Destination Name : {{ one_post.title }}</h1>
+    <small>Post By : <b>{{ one_post.author }}</b> in {{ one_post.created }} </small><br>
+    <big><b>Location :</b> {{ one_post.location }}</big><br>
+    <big><b>Max Attitude : </b>{{ one_post.maxattitude }}</big><br>
+    <big><b>Best Season : </b>{{ one_post.bestseason }}</big><br>
+    <big><b>Budget : </b>{{ one_post.budget }}</big><br>
+    <big><b>Major Attractions : </b>{{ one_post.attaraction }}</big><br>
+    <big><b>Experience Required : </b>{{ one_post.experiencerequired }}</big><br>
+    <big><b>Carrying Materials : </b>{{ one_post.carrying }}</big><br>
+    <big><b>Hotels : </b>{{ one_post.hotels }}</big><br>
+    <big><b>Trip Entire Detail : </b>{{ one_post.body }}</big><br/><br/>
+    <img src="{{ one_post.photo.url }}" width="500px" height="500px"/>
+    <img src="{{ one_post.photo1.url }}" width="500px" height="500px"/>
+
+</br>
+<br>
+{% ratings one_post %}
+
+
+
+
+
+
+ {% if user.is_authenticated %}
+<a href="{% url 'blog:delete' one_post.pk one_post.author user.username %}">Delete</a>
+{% endif %}
+
+
+<br/>
+    <br/>
+<br/>
+    <h5>Comments</h5>
+    {% for co in comments %}
+        Username : <b>{{ co.name }}</b><br/>
+        Comment : <b>{{ co.comment_body }}</b><hr>
+        {% empty %}
+            <h6>No comments yet</h6>
+    {% endfor %}<br>
+{% similar one_post.title one_post.pk as similar_posts %}
+    <ul>
+    <h4>Similar Post</h4>
+    {% for similar in similar_posts %}
+    <li><a href="{% url 'blog:detail' pk=similar.pk %}" >{{ similar.title }}</a></li>
+    {% endfor %}
+
+    </ul>
+
+
+    <form action="" method="POST">{% csrf_token %}
+
+<fieldset>
+  <legend>Add Comment</legend>
+    {{ comment_form.as_p }}
+    <input type="submit" class="btn btn-success" value="Add Comment">
+    </fieldset>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+
+
+{% block titleBlock %}
+    home | {{block.super}}
+{% endblock %}
+
+{% block bodyBlock %}
+
+    <div class="row">
+        <div class="col-8">
+            <div class="post">
+                {# {{ posts_list | length }} #}
+
+                {% for each in value %}
+                    <img src="{{ each.photo.url }}" width="120px" height="60px"/>
+                    <h3 style="color: chartreuse"><a href="{% url 'blog:adddetail' pk=each.pk %}"> Hotel Name : {{ each.name |  capitalize | cut:' '  }}</a></h3>
+                    <big> Location : {{ each.location| truncatechars:'15' }}
+                    </big><hr>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="post">
+                <h4>Latest Post :</h4>
+                {% get_latest 4 %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

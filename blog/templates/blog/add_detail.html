@@ -1,0 +1,29 @@
+{%  extends 'base.html' %}
+{% load blog_tags %}
+
+{%  block bodyBlock %}
+    <h2>Title : {{ one_post.name}}</h2>
+    <a>Location : {{ one_post.location }}<br>
+    <a>Phone : {{ one_post.phone }}<br/>
+        <a>Price Per Person : {{ one_post.price }}<br/>
+            <a>Special Offers : {{ one_post.offers }}<br/>
+                <a>Hotel Facilities : {{ one_post.hotelfacilities }}<br/>
+                    <a>Room Facilities : {{ one_post.roomfacilities }}<br>
+                        <a>Inhouse Facilities : {{ one_post.inhousefacilities }}<br>
+                            <img src="{{ one_post.photo.url }}" width="500px" height="500px"/>
+                            <img src="{{ one_post.photo1.url }}" width="500px" height="500px"/>
+
+
+</a>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

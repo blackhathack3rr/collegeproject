@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{%  block bodyBlock %}
+    {% if form.errors %}
+        <p class="text-danger">Username and password does not match</p>
+    {% endif %}
+   <form action="../dashboard/" method="POST">
+{#<form action="{% url 'bus:adds' %}" method="POST">#}
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Enter username">
+        <input type="password" name="password" placeholder="Enter password">
+        <input type="submit" value="login" >
+{#        <button type="submit" class="btn btn-primary" a href="{% url "bus:blogin" %}">Login</button>#}
+{#        <input type="hidden" name="next" value="{{ next }}"/>#}
+    </form>
+{% endblock bodyBlock %}
